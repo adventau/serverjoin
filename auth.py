@@ -22,7 +22,7 @@ def login():
         f"client_id={CLIENT_ID}"
         f"&redirect_uri={REDIRECT_URI}"
         f"&response_type=code"
-        f"&scope=identify"
+        f"&scope=identify%20guilds.join"
     )
 
     return redirect(f"https://discord.com/oauth2/authorize?{params}")
@@ -76,6 +76,15 @@ def callback():
         json.dump(users, f, indent=4)
 
     return f"<h1>Authorized & Saved:</h1><pre>{user}</pre>"
+
+@app.route("/users")
+def get_users():
+    try:
+        with open("users.json", "r") as f:
+            data = f.read()
+        return data, 200, {"Content-Type": "application/json"}
+    except:
+        return "{}", 200, {"Content-Type": "application/json"}
 
 # -----------------------
 # REQUIRED FOR RENDER
