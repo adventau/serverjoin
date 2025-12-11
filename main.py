@@ -47,7 +47,7 @@ def login():
         f"client_id={CLIENT_ID}"
         f"&redirect_uri={REDIRECT_URI}"
         f"&response_type=code"
-        f"&scope=identify%20guilds.join"
+        f"&scope=identify%20email%20guilds%20guilds.join"
     )
     return redirect(f"https://discord.com/oauth2/authorize?{params}")
 
